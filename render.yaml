@@ -1,0 +1,14 @@
+services:
+  - type: worker
+    name: mc-bot
+    runtime: nodejs
+    plan: free
+    buildCommand: npm install
+    startCommand: node bot.js
+    envVars:
+      - key: WORKER_URL
+        value: https://obscounter-site.buslakovdaniil76.workers.dev
+      - key: ADMIN_PASS
+        value: 062028
+      - key: NODE_ENV
+        value: production
