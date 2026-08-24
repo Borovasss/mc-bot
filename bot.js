@@ -9,7 +9,7 @@ const ADMIN_PASS = process.env.ADMIN_PASS || '062028';
 const PORT = process.env.PORT || 3000;
 
 let config = {
-  host: 'mc.2b2t.org.ru',
+  host: 'comendantmc.2b2t.org.ru',
   port: 25565,
   version: '1.17',
   username: 'bobofpp',
