@@ -11,7 +11,7 @@ const PORT = process.env.PORT || 3000;
 let config = {
   host: 'comendantmc.2b2t.org.ru',
   port: 25565,
-  version: '1.17',
+  version: '1.21.4',
   username: 'bobofpp',
   auth: 'offline'
 };
@@ -137,8 +137,10 @@ function handleRemoteCommands(commands) {
         break;
       case 'chat':
         if (bot && cmd.data) {
-          bot.chat(cmd.data);
+          try { bot.chat(cmd.data); } catch (e) { log(`Ошибка отправки: ${e.message}`); }
           log(`>> ${cmd.data}`);
+        } else {
+          log('Бот не подключён. Команда не отправлена.');
         }
         break;
       case 'goto':
@@ -397,11 +399,12 @@ function handleCommand(input) {
       }
       log('Бот выключен.');
       break;
-    case 'dig':
+    case 'dig': {
       const block = bot.blockAtCursor(5);
       if (block) { log(`Ломаю: ${block.name}`); bot.dig(block).catch(e => log(`Ошибка: ${e.message}`)); }
       else log('Нет блока перед глазами.');
       break;
+    }
     case 'look':
       if (args.length >= 2) {
         bot.look(parseFloat(args[0]) * Math.PI / 180, parseFloat(args[1]) * Math.PI / 180);
